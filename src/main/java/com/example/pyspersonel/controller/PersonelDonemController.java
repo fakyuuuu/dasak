@@ -36,6 +36,12 @@ public class PersonelDonemController {
         return personelDonemMapper.toDto(saved);
     }
 
+    @PutMapping("/{id}")
+    public com.example.pyspersonel.dto.PersonelDonemDTO update(@PathVariable Integer id, @RequestBody com.example.pyspersonel.dto.PersonelDonemDTO dto) {
+        PersonelDonem updated = personelDonemService.update(id, dto);
+        return personelDonemMapper.toDto(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         personelDonemService.deleteById(id);

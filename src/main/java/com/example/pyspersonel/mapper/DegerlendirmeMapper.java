@@ -3,6 +3,7 @@ package com.example.pyspersonel.mapper;
 import com.example.pyspersonel.entity.Degerlendirme;
 import com.example.pyspersonel.dto.DegerlendirmeDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
@@ -16,6 +17,8 @@ public interface DegerlendirmeMapper {
     @org.mapstruct.Mapping(target = "degAlanPersDonem", source = "degAlanPersDonemId", qualifiedByName = "toPersonelDonem")
     @org.mapstruct.Mapping(target = "degVerenPersDonem", source = "degVerenPersDonemId", qualifiedByName = "toPersonelDonem")
     Degerlendirme toEntity(DegerlendirmeDTO dto);
+
+    void updateEntityFromDto(DegerlendirmeDTO dto, @MappingTarget Degerlendirme entity);
 
     @org.mapstruct.Named("toPersonelDonem")
     public static com.example.pyspersonel.entity.PersonelDonem toPersonelDonem(Integer persDonemId) {

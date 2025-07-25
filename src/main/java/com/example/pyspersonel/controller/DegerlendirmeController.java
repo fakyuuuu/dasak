@@ -36,6 +36,12 @@ public class DegerlendirmeController {
         return degerlendirmeMapper.toDto(saved);
     }
 
+    @PutMapping("/{id}")
+    public com.example.pyspersonel.dto.DegerlendirmeDTO update(@PathVariable Integer id, @RequestBody com.example.pyspersonel.dto.DegerlendirmeDTO dto) {
+        Degerlendirme updated = degerlendirmeService.update(id, dto);
+        return degerlendirmeMapper.toDto(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         degerlendirmeService.deleteById(id);

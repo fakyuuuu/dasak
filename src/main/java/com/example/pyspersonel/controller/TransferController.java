@@ -33,6 +33,12 @@ public class TransferController {
         return transferMapper.toDto(saved);
     }
 
+    @PutMapping("/{id}")
+    public com.example.pyspersonel.dto.TransferDTO update(@PathVariable Integer id, @RequestBody com.example.pyspersonel.dto.TransferDTO dto) {
+        com.example.pyspersonel.entity.Transfer updated = transferService.update(id, dto);
+        return transferMapper.toDto(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         transferService.deleteById(id);

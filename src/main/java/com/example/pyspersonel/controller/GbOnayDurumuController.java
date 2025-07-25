@@ -36,6 +36,12 @@ public class GbOnayDurumuController {
         return gbOnayDurumuMapper.toDto(saved);
     }
 
+    @PutMapping("/{id}")
+    public com.example.pyspersonel.dto.GbOnayDurumuDTO update(@PathVariable Integer id, @RequestBody com.example.pyspersonel.dto.GbOnayDurumuDTO dto) {
+        GbOnayDurumu updated = gbOnayDurumuService.update(id, dto);
+        return gbOnayDurumuMapper.toDto(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         gbOnayDurumuService.deleteById(id);

@@ -36,6 +36,12 @@ public class GeriBildirimController {
         return geriBildirimMapper.toDto(saved);
     }
 
+    @PutMapping("/{id}")
+    public com.example.pyspersonel.dto.GeriBildirimDTO update(@PathVariable Integer id, @RequestBody com.example.pyspersonel.dto.GeriBildirimDTO dto) {
+        GeriBildirim updated = geriBildirimService.update(id, dto);
+        return geriBildirimMapper.toDto(updated);
+    }
+
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         geriBildirimService.deleteById(id);
