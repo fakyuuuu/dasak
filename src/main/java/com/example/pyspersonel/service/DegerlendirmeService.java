@@ -5,6 +5,8 @@ import com.example.pyspersonel.repository.DegerlendirmeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pyspersonel.mapper.DegerlendirmeMapper;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,9 @@ import java.util.Optional;
 public class DegerlendirmeService {
     @Autowired
     private DegerlendirmeRepository degerlendirmeRepository;
+
+    @Autowired
+    private DegerlendirmeMapper degerlendirmeMapper;
 
     public List<Degerlendirme> findAll() {
         return degerlendirmeRepository.findAll();
@@ -23,6 +28,14 @@ public class DegerlendirmeService {
 
     public Degerlendirme save(Degerlendirme degerlendirme) {
         return degerlendirmeRepository.save(degerlendirme);
+    }
+
+    public Degerlendirme update(Integer id, com.example.pyspersonel.dto.DegerlendirmeDTO dto) {
+        Degerlendirme entity = degerlendirmeRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Degerlendirme not found"));
+        entity.setDegNo(id);
+        degerlendirmeMapper.updateEntityFromDto(dto, entity);
+        return degerlendirmeRepository.save(entity);
     }
 
     public void deleteById(Integer id) {

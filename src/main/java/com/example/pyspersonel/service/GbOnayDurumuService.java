@@ -5,6 +5,8 @@ import com.example.pyspersonel.repository.GbOnayDurumuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.pyspersonel.mapper.GbOnayDurumuMapper;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +14,9 @@ import java.util.Optional;
 public class GbOnayDurumuService {
     @Autowired
     private GbOnayDurumuRepository gbOnayDurumuRepository;
+
+    @Autowired
+    private GbOnayDurumuMapper gbOnayDurumuMapper;
 
     public List<GbOnayDurumu> findAll() {
         return gbOnayDurumuRepository.findAll();
@@ -23,6 +28,14 @@ public class GbOnayDurumuService {
 
     public GbOnayDurumu save(GbOnayDurumu gbOnayDurumu) {
         return gbOnayDurumuRepository.save(gbOnayDurumu);
+    }
+
+    public GbOnayDurumu update(Integer id, com.example.pyspersonel.dto.GbOnayDurumuDTO dto) {
+        GbOnayDurumu entity = gbOnayDurumuRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("GbOnayDurumu not found"));
+        entity.setKayitId(id);
+        gbOnayDurumuMapper.updateEntityFromDto(dto, entity);
+        return gbOnayDurumuRepository.save(entity);
     }
 
     public void deleteById(Integer id) {

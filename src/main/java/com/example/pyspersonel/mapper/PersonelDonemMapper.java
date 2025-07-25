@@ -3,6 +3,7 @@ package com.example.pyspersonel.mapper;
 import com.example.pyspersonel.entity.PersonelDonem;
 import com.example.pyspersonel.dto.PersonelDonemDTO;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
@@ -14,6 +15,8 @@ public interface PersonelDonemMapper {
 
     @org.mapstruct.Mapping(target = "personel", source = "persId", qualifiedByName = "toPersonel")
     PersonelDonem toEntity(PersonelDonemDTO dto);
+
+    void updateEntityFromDto(PersonelDonemDTO dto, @MappingTarget PersonelDonem entity);
 
     @org.mapstruct.Named("toPersonel")
     public static com.example.pyspersonel.entity.Personel toPersonel(Integer persId) {
